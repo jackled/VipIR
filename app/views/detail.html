@@ -1,0 +1,197 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#/">USF VIP</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#/search">Search</a></li>
+        <li><a href="#/list">List</a></li>
+		<li class="active"><a href="#/detail">Detail</a></li>
+      </ul>
+	  <ul class="nav navbar-nav navbar-right">
+		<li>
+			<div>
+				<div class="check-element animate-hide navbar-text" ng-show="ls.name">
+				  {{ls.name}} ({{ls.role}})
+				</div>
+			</div>
+		</li>
+		<li>
+			<form action="#/exit">
+				<button class="navbar-btn btn-primary btn-sm"><span class="glyphicon glyphicon-log-out"></span> Logout</button>
+			</form>
+		</li>
+	  </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="panel panel-default">
+	<div class="panel-body">
+		
+		<div class="row">
+			<div class="col-sm-2">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-info">Vip ID</span>
+					<input type="text" ng-model="detail.vip_id" class="form-control animated bounce" placeholder="" disabled>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-sm-5">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-info">Created On</span>
+					<input type="text" ng-model="detail.created_dt" class="form-control" placeholder="N/A" disabled>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-sm-5">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-info">Last Updated</span>
+					<input type="text" ng-model="detail.updated_dt" class="form-control" placeholder="N/A" disabled>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+
+		<div class="row top-buffer">
+			<div class="col-md-4">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">Name</span>
+					<input type="text" ng-model="detail.name_first" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-md-4">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">Middle</span>
+					<input type="text" ng-model="detail.name_middle" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-md-4">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">Last</span>
+					<input type="text" ng-model="detail.name_last" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+
+		<div class="row top-buffer">
+			<div class="col-md-4" ng-controller="DatepickerCtrl">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">DOB</span>
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="detail.dob" is-open="opened" ng-required="false" close-text="Close" />
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-md-4">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">SSN</span>
+					<input type="text" ng-model="detail.ssn" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+
+		<div class="row top-buffer">
+			<div class="col-md-4">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">Email</span>
+					<input type="text" ng-model="detail.email" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-md-4">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-success">Phone</span>
+					<input type="text" ng-model="detail.phone" class="form-control" placeholder="nnnnnnnnnn">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		
+		<div class="row top-buffer">
+			<div class="col-xs-4">
+				{{detail.vp_area_gems_id}}
+			</div><!-- /.col -->
+			<div class="col-xs-4">
+				{{detail.department_gems_id}}
+			</div><!-- /.col -->
+			<div class="col-xs-4">
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-warning">VP Area</span>
+					<select class="form-control" ng-model="detail.vp_area_gems_id" ng-options="vpa.vp_area_gems_id as vpa.vp_area_name for vpa in vp_area_list">
+						<option value="">None</option>
+					</select>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-sm-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-warning">Department</span>
+					<select class="form-control" ng-model="detail.department_gems_id" ng-options="dept.department_gems_id as dept.department_name for dept in department_list | filter: dept.vp_area_gems_id = detail.vp_area_gems_id : true">
+						<option value="">None</option>
+					</select>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-sm-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-warning">Program</span>
+					<input type="text" ng-model="detail.program" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		
+		<div class="row top-buffer">
+			<div class="col-sm-12">
+				<div class="input-group input-group-md">
+					<span class="input-group-addon list-group-item-warning">Notes</span>
+					<textarea class="form-control" rows="6" ng-model='detail.notes'></textarea>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		
+		<div class="row top-buffer">
+			<div class="col-md-4">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-warning">Sponsor</span>
+					<input type="text" ng-model="detail.sponsor_netid" class="form-control" placeholder="">
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-md-4" ng-controller="DatepickerCtrl">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-warning">Start Date</span>
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="detail.start_date" is-open="opened" ng-required="false" close-text="Close" />
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+			<div class="col-md-4" ng-controller="DatepickerCtrl">
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon list-group-item-warning">End Date</span>
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="detail.end_date" is-open="opened" ng-required="false" close-text="Close" />
+						<span class="input-group-btn">
+							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+						</span>
+				</div><!-- /input-group -->
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+		
+		<div class="btn-group top-buffer">
+		  <div class="controls">
+			<div ng-switch on="details.id > 0">
+			  <button class="btn btn-success" ng-disabled="!detail.name_last || !detail.name_first || !detail.dob" ng-click="vipUpdate()">
+				  <span class="glyphicon glyphicon-refresh"></span> Update
+			  </button>
+			</div>
+		   </div>
+		</div>
+	</div>
+</div>
