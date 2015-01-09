@@ -17,7 +17,6 @@ myApp
 		});
 		
 		$scope.getIdentity = function () {
-			console.log('getIdentity');
 			myFactory.getIdentity(	$rootScope.ls.service['SERVER_APP_ONE'].url,
 									$rootScope.ls.service['SERVER_APP_ONE'].token,
 									'identity').then(function(data) {
@@ -32,15 +31,11 @@ myApp
 	}])
 // main controller - check the token and route accordingly
 	.controller('MainCtrl', ['$rootScope', '$location', 'myFactory', function ($rootScope, $location, myFactory) {
-		console.log('LSMainCtrl----> ' + JSON.stringify($rootScope.ls, null, '\t'));
 		$rootScope.ls.server = 'SERVER_APP_ONE';
-
 		// if appid is set and there is no token then request one from the token service
 		if ($rootScope.ls.server !== '' && $rootScope.ls.service[$rootScope.ls.server].appid !== '' && $rootScope.ls.service[$rootScope.ls.server].token === '') {
-			console.log('(((3))) before POST /request');
 			myFactory.getToken($rootScope.ls.service[$rootScope.ls.server].ts, $rootScope.ls.service[$rootScope.ls.server].appid).then(function(data) {
 				// set token
-				console.log('(((3b))) AFTER');
 				$rootScope.ls.service[$rootScope.ls.server].token = data;
 			});
 		}
@@ -57,6 +52,7 @@ myApp
 	.controller('SearchCtrl', ['$rootScope', '$scope', '$location', 'myFactory', function ($rootScope, $scope, $location, myFactory) {
 		$rootScope.ls.server = 'SERVER_APP_ONE';
 		$rootScope.ls.route = $location.path(); // save the current route
+		$rootScope.flags.identity_add = false;
 
 		$scope.vipSearch = function () {
 			myFactory.getData(	$rootScope.ls.service['SERVER_APP_ONE'].url,
@@ -66,10 +62,8 @@ myApp
 								$rootScope.search.ssn1 + $rootScope.search.ssn2 + $rootScope.search.ssn3,
 								'search').then(function(data) {
 				if (data.status === 'mismatch') { // if not found then just enable the add button
-					$rootScope.flags.add = true;
-					console.log('SearchCtrl:mismatch');
+					$rootScope.flags.identity_add = true;
 				} else { // otherwiese, set the identity list
-					console.log('SearchCtrl:success ' + data.value.length);
 					$rootScope.identity_list = data.value;
 					if (data.value.length > 1) { // list page
 						$location.path('/list');
@@ -101,7 +95,6 @@ myApp
 		};
 		
 		$scope.vipAdd = function () { // create new identity form
-			console.log('vipAdd');
 			$rootScope.detail.vip_id = '';
 			$rootScope.detail.name_last = $rootScope.search.name;
 			$rootScope.detail.name_first = '';
@@ -139,9 +132,7 @@ myApp
 // list controller
 	.controller('ListCtrl', ['$rootScope', '$scope', '$location', function ($rootScope, $scope, $location) {
 		$rootScope.ls.route = $location.path(); // save the current route
-		//console.log('LSlist ----> '+ JSON.stringify($rootScope.ls, null, '\t'));
 		$scope.vipDetails = function(id) { // populate identity form with a list data
-			console.log(id);
 			// populate detail
 			$rootScope.detail.vip_id = id.vip_id;
 			$rootScope.detail.name_last = id.name_last;
@@ -166,19 +157,16 @@ myApp
 		};
 	}])
 // detail controller - grab vp areas and department lists
-	.controller('DetailCtrl', ['$rootScope', '$scope', '$location', 'myFactory', function ($rootScope, $scope, $location, myFactory) {
+	.controller('DetailCtrl', ['$rootScope', '$scope', '$location', '$route', '$log', 'myFactory', function ($rootScope, $scope, $location, $route, $log, myFactory) {
 		$rootScope.ls.route = $location.path(); // save the current route
-		//console.log('LSdetail ----> '+ JSON.stringify($rootScope.ls, null, '\t'));
-		//console.log($rootScope.vp_area_list);
-		//console.log($rootScope.department_list);
+		//$log.info(JSON.stringify($rootScope.detail, null, '\t'));
 		$scope.vipUpdate = function() { // update the VIP database
-			console.log('vipUpdate');
 			myFactory.updateData(	$rootScope.ls.service['SERVER_APP_ONE'].url,
 									$rootScope.ls.service['SERVER_APP_ONE'].token,
 									$rootScope.detail,
 									'update').then(function(data) {
 				if (data.status === 'error') { // error
-					console.log('DetailCtrl:error');
+					$log.error(data.action);
 				} else {
 					if (data.action === 'insert') { // inserted record
 						$rootScope.detail.vip_id = data.vip_id;
@@ -187,23 +175,24 @@ myApp
 					} else if (data.action === 'update') { // updated record
 						$rootScope.detail.updated_dt = data.updated_dt;
 					}
-					console.log('DetailCtrl:success');
 				}
 			});
 			// jump to detail page
-			$location.path('/detail');
+			//$location.path('/detail');
+			$route.reload();
 		};
 	}])
 // exit controller
 	.controller('ExitCtrl', ['$rootScope', 'storage', function ($rootScope, storage) {
 		storage.clearAll();
-		//console.log('LSExitCtrl----> '+ JSON.stringify($rootScope.ls, null, '\t'));
 	}])
 // error controller
 	.controller('ErrorCtrl', ['$rootScope', function ($rootScope) {
 		$rootScope.ls.route = '/error';
 	}])
 	.controller('DatepickerCtrl', function ($scope) {
+		$scope.format = 'yyyy-MM-dd';
+
 		$scope.today = function() {
 		  $scope.dt = new Date();
 		};
@@ -216,7 +205,6 @@ myApp
 		$scope.open = function($event) {
 		  $event.preventDefault();
 		  $event.stopPropagation();
-
 		  $scope.opened = true;
 		};
 	});

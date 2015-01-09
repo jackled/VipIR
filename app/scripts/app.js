@@ -40,7 +40,7 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngSanitize', 'angularLocalStora
 	}]);
 
 // initialize/bind to local storage
-myApp.run(['$rootScope', '$location', 'storage', 'SERVER_APP_ONE_URL', function($rootScope, $location, storage, SERVER_APP_ONE_URL) {
+myApp.run(['$rootScope', '$location', 'storage', '$log', 'SERVER_APP_ONE_URL', function($rootScope, $location, storage, $log, SERVER_APP_ONE_URL) {
 	// persistent local storage
 	storage.bind($rootScope, 'ls', {defaultValue: {
 		name: '',
@@ -57,7 +57,7 @@ myApp.run(['$rootScope', '$location', 'storage', 'SERVER_APP_ONE_URL', function(
 				'token' : ''}
 		}
 	} , storeName: 'ExampleApp'});
-	console.log('LSrun ----> '+ JSON.stringify($rootScope.ls, null, '\t'));
+	$log.info('run: '+ JSON.stringify($rootScope.ls, null, '\t'));
 	
 	// initialize scope variables
 	$rootScope.vp_area_list = [];
@@ -77,7 +77,7 @@ myApp.run(['$rootScope', '$location', 'storage', 'SERVER_APP_ONE_URL', function(
 		name_last: '',
 		name_first: '',
 		name_middle: '',
-		dob: new Date(),
+		dob: '',
 		ssn: '',
 		email: '',
 		phone: '',
@@ -86,13 +86,13 @@ myApp.run(['$rootScope', '$location', 'storage', 'SERVER_APP_ONE_URL', function(
 		program: '',
 		notes: '',
 		sponsor_netid: '',
-		start_date: new Date(),
-		end_date: new Date(),
+		start_date: '',
+		end_date: '',
 		created_dt: '',
 		updated_dt: ''
 	};
 	// search and detail	
-	$rootScope.flags = {add: false};
+	$rootScope.flags = {identity_add: false};
 }]);
 
 // define html5 directive for authorization
@@ -121,3 +121,15 @@ myApp.directive('hasRole', ['myRole', function(myRole) {
 		}
 	};
 }]);
+
+// iu-bootstrap datepicker formatting fix (01/09/2015)
+myApp.directive('datepickerPopup', function () {
+  return {
+    restrict: 'EAC',
+    require: 'ngModel',
+    link: function(scope, element, attr, controller) {
+      //remove the default formatter from the input directive to prevent conflict
+      controller.$formatters.shift();
+	}
+  };
+});

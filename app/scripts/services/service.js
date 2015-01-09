@@ -4,7 +4,6 @@ myApp
 	.factory('myFactory', ['$http', '$q', function($http, $q) {
 		return {
 			'getIdentity': function(lsUrl, lsToken, action) { // request data from the app server
-				console.log('myFactory.getIdentity: ' + lsUrl + ' using token: ' + lsToken);
 				var deferred = $q.defer();
 				$http({
 					method: 'POST',
@@ -19,7 +18,6 @@ myApp
 				return deferred.promise;
 			},
 			'getData': function(lsUrl, lsToken, fname, fdob, fssn, action) { // request data from the app server
-				console.log('myFactory.getData: ' + lsUrl + ' using token: ' + lsToken + ' fname:' + fname + ' fdob:' + fdob + ' fssn:' + fssn +' action:' + action);
 				var deferred = $q.defer();
 				$http({
 					method: 'POST',
@@ -34,7 +32,6 @@ myApp
 				return deferred.promise;
 			},
 			'updateData': function(lsUrl, lsToken, id, action) { // sent id to the app server
-				console.log('myFactory.updateData: ' + lsUrl + ' using token: ' + lsToken + ' id:' + id + ' action:' + action);
 				var deferred = $q.defer();
 				$http({
 					method: 'POST',
@@ -49,7 +46,6 @@ myApp
 				return deferred.promise;
 			},
 			'getVpList': function(lsUrl, lsToken, action) { // request data from the app server
-				console.log('myFactory.getVpList: ' + lsUrl + ' using token: ' + lsToken);
 				var deferred = $q.defer();
 				$http({
 					method: 'POST',
@@ -66,7 +62,6 @@ myApp
 			'getToken': function(lsTs, lsAppid) { // request token for the appid from the token service
 				//lsTs = lsTs + '/request?service=' + lsAppid;
 				lsTs = lsTs + '/request';
-				console.log('myFactory.getToken: ' + lsTs + ' for appid: ' + lsAppid);
 				var deferred = $q.defer();
 				$http({
 					method: 'POST',
@@ -83,10 +78,10 @@ myApp
 			}
 		};
 	}])
-	.factory('myInterceptor', ['$rootScope', '$location', '$q', function($rootScope, $location, $q) {
+	.factory('myInterceptor', ['$rootScope', '$location', '$q', '$log', function($rootScope, $location, $q, $log) {
 		return {
 			'responseError': function(response) {
-				console.log('RESPONSE ERROR INTERCEPTOR:' + response.status);
+				$log.warn('responseError interceptor:' + response.status);
 				if (response.status === 401) {
 					// set AppID and TS in local storage and clear the TOKEN for the most recent server data request
 					$rootScope.ls.service[$rootScope.ls.server].appid = response.data.appid;
@@ -95,7 +90,6 @@ myApp
 					
 					// now redirect to a token service which will then re-enter the spa at main screen.
 					var redirect = response.data.ts + '/login?service=' + response.data.appid + '&redirectURL=' + $rootScope.ls.host + '#/main';
-					console.log('(((2))) before GET /login');
 					window.location = redirect;
 				} else {
 					$rootScope.error = 'Critical service error.  Please try again later.';

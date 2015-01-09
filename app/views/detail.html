@@ -83,7 +83,7 @@
 			<div class="col-md-4" ng-controller="DatepickerCtrl">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">DOB</span>
-						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="detail.dob" is-open="opened" ng-required="false" close-text="Close" />
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" date-format="yyyy-MM-dd" date-type="string" ng-model="detail.dob" is-open="opened" ng-required="false" close-text="Close" />
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>

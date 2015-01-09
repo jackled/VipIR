@@ -158,15 +158,17 @@ if ($rv->result == 'error') { // if there was a validation problem then return e
 					"created_dt" => null,
 					"updated_dt" => null
 				));
-				if ($vip_id != "") {
-				// get the timestamp for this new record
+				
+				if ($vip->error()[1] == "") { // no error in the last query
 					$data_r = $vip->select("identity", array("updated_dt"), array("vip_id[=]" => $vip_id));
 					$data = array('status' => 'success', 'action' => 'insert', 'vip_id' => $vip_id, 'updated_dt' => $data_r[0]['updated_dt']);
 				} else {
-					$data = array('status' => 'success', 'action' => 'none');
+					error_log("IDENITY INSERT ERROR:".print_r($vip->error(), true));
+					$data = array('status' => 'error', 'action' => $vip->error()[2]);
 				}
 			} else { // update
-				$vip_id = $vip->update("identity", array(
+				$vip_id = $id['vip_id'];
+				$vip->update("identity", array(
 					"name_last" => ucwords($id['name_last']),
 					"name_first" => ucwords($id['name_first']),
 					"name_middle" => ucwords($id['name_middle']),
@@ -182,12 +184,13 @@ if ($rv->result == 'error') { // if there was a validation problem then return e
 					"start_date" => $start_date,
 					"end_date" => $end_date
 				), array("vip_id[=]" => $id['vip_id']));
-				// get the timestamp for this updated record
-				if ($vip_id != "") {
+				
+				if ($vip->error()[1] == "") { // no error in the last query
 					$data_r = $vip->select("identity", array("updated_dt"), array("vip_id[=]" => $vip_id));
 					$data = array('status' => 'success', 'action' => 'update', 'updated_dt' => $data_r[0]['updated_dt']);
 				} else {
-					$data = array('status' => 'success', 'action' => 'none');
+					error_log("IDENITY UPDATE ERROR:".print_r($vip->error(), true));
+					$data = array('status' => 'error', 'action' => $vip->error()[2]);
 				}
 			}
 			break;
