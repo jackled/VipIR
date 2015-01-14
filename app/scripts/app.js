@@ -27,6 +27,10 @@ var myApp = angular.module('myApp', ['ngRoute', 'ngSanitize', 'angularLocalStora
 				templateUrl: 'views/error.html',
 				controller: 'ErrorCtrl'
 			})
+			.when('/unauthorized', {
+				templateUrl: 'views/error.html',
+				controller: 'ErrorCtrl'
+			})
 			.when('/exit', {
 				templateUrl: 'views/exit.html',
 				controller: 'ExitCtrl'
