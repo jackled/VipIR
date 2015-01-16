@@ -36,28 +36,28 @@
 
 <form name="vipSearchForm" class="form-horizontal">
 	<dl class="dl-horizontal">
-		<dt>Name</dt><dd><p class="input-group"><input type="text" name="name" ng-model="search.name"></p></dd>
+		<dt>Name</dt><dd><p class="input-group"><input type="text" name="name" ng-model="ls.search.name"></p></dd>
 		<dt>DOB</dt>
 			<dd><p class="input-group">
-				<input type="text" size="4" maxlength="4" placeholder="yyyy" name="dob1" ng-model="search.dob1">
-				<input type="text" size="2" maxlength="2" placeholder="mm" name="dob2" ng-model="search.dob2">
-				<input type="text" size="2" maxlength="2" placeholder="dd" name="dob3" ng-model="search.dob3">
+				<input type="text" size="4" maxlength="4" placeholder="yyyy" name="dob1" ng-model="ls.search.dob1">
+				<input type="text" size="2" maxlength="2" placeholder="mm" name="dob2" ng-model="ls.search.dob2">
+				<input type="text" size="2" maxlength="2" placeholder="dd" name="dob3" ng-model="ls.search.dob3">
 			</p></dd>
 		<dt>SSN</dt>
 			<dd><p class="input-group">
-				<input type="text" size="3" maxlength="3" placeholder="nnn" name="ssn1" ng-model="search.ssn1">
-				<input type="text" size="2" maxlength="2" placeholder="nn" name="ssn2" ng-model="search.ssn2">
-				<input type="text" size="4" maxlength="4" placeholder="nnnn" name="ssn3" ng-model="search.ssn3">
+				<input type="text" size="3" maxlength="3" placeholder="nnn" name="ssn1" ng-model="ls.search.ssn1">
+				<input type="text" size="2" maxlength="2" placeholder="nn" name="ssn2" ng-model="ls.search.ssn2">
+				<input type="text" size="4" maxlength="4" placeholder="nnnn" name="ssn3" ng-model="ls.search.ssn3">
 			</p></dd>
 		<dt></dt>
 		<dd>
 			<div class="btn-group">
 			  <div class="controls">
-				<button class="btn btn-primary" ng-disabled="!search.name && !search.dob1 && !search.ssn1" ng-click="vipSearch()">
+				<button class="btn btn-primary" ng-disabled="!ls.search.name && !ls.search.dob1 && !ls.search.ssn1" ng-click="vipSearch()">
 					<span class="glyphicon glyphicon-search"></span> Search
 				</button>
-				<button class="btn btn-primary" ng-disabled="!search.name && !search.dob1 && !search.ssn1" type="reset" ng-click="reset()">Clear</button>
-				<button class="btn btn-success" ng-disabled="!flags.identity_add" ng-click="vipAdd()">
+				<button class="btn btn-primary" ng-disabled="!ls.search.name && !ls.search.dob1 && !ls.search.ssn1" type="reset" ng-click="reset()">Clear</button>
+				<button class="btn btn-success" ng-disabled="!ls.flags.identity_add" ng-click="vipAdd()">
 					<span class="glyphicon glyphicon-plus"></span> Add
 				</button>
 			  </div>

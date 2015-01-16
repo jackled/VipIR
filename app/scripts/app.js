@@ -52,7 +52,40 @@ myApp.run(['$rootScope', '$location', 'storage', '$log', 'SERVER_APP_ONE_URL', f
 		host: $location.absUrl(),
 		route: '/home', // set the default route to splash screen
 		server: '', // last service called
-		timestamp: new Date().getTime(),
+		timestamp: new Date().getTime(), // last activity
+		vp_area_list: {},
+		department_list: {},
+		identity_list: {},
+		search: {
+			name: '',
+			dob1: '',
+			dob2: '',
+			dob3: '',
+			ssn1: '',
+			ssn2: '',
+			ssn3: ''
+		},
+		detail: {
+			vip_id: '',
+			name_last: '',
+			name_first: '',
+			name_middle: '',
+			dob: '',
+			ssn: '',
+			email: '',
+			phone: '',
+			vp_area_gems_id: '',
+			department_gems_id: '',
+			program: '',
+			notes: '',
+			sponsor_netid: '',
+			start_date: '',
+			end_date: '',
+			created_dt: '',
+			updated_dt: ''
+		},
+		// search and detail	
+		flags: {identity_add: false},
 		service: {
 			'SERVER_APP_ONE' : {
 				'url' : SERVER_APP_ONE_URL,
@@ -60,43 +93,8 @@ myApp.run(['$rootScope', '$location', 'storage', '$log', 'SERVER_APP_ONE_URL', f
 				'appid' : '',
 				'token' : ''}
 		}
-	} , storeName: 'ExampleApp'});
+	} , storeName: 'vipir'});
 	$log.info('run: '+ JSON.stringify($rootScope.ls, null, '\t'));
-	
-	// initialize scope variables
-	$rootScope.vp_area_list = [];
-	$rootScope.department_list = [];
-	$rootScope.identity_list = [];
-	$rootScope.search = {
-		name: '',
-		dob1: '',
-		dob2: '',
-		dob3: '',
-		ssn1: '',
-		ssn2: '',
-		ssn3: ''
-	};
-	$rootScope.detail = {
-		vip_id: '',
-		name_last: '',
-		name_first: '',
-		name_middle: '',
-		dob: '',
-		ssn: '',
-		email: '',
-		phone: '',
-		vp_area_gems_id: '',
-		department_gems_id: '',
-		program: '',
-		notes: '',
-		sponsor_netid: '',
-		start_date: '',
-		end_date: '',
-		created_dt: '',
-		updated_dt: ''
-	};
-	// search and detail	
-	$rootScope.flags = {identity_add: false};
 }]);
 
 // define html5 directive for authorization

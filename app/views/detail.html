@@ -41,19 +41,19 @@
 			<div class="col-sm-2">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-info">Vip ID</span>
-					<input type="text" ng-model="detail.vip_id" class="form-control animated bounce" placeholder="" disabled>
+					<input type="text" ng-model="ls.detail.vip_id" class="form-control animated bounce" placeholder="" disabled>
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 			<div class="col-sm-5">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-info">Created On</span>
-					<input type="text" ng-model="detail.created_dt" class="form-control" placeholder="N/A" disabled>
+					<input type="text" ng-model="ls.detail.created_dt" class="form-control" placeholder="N/A" disabled>
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 			<div class="col-sm-5">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-info">Last Updated</span>
-					<input type="text" ng-model="detail.updated_dt" class="form-control" placeholder="N/A" disabled>
+					<input type="text" ng-model="ls.detail.updated_dt" class="form-control" placeholder="N/A" disabled>
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -62,19 +62,19 @@
 			<div class="col-md-4">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">Name</span>
-					<input type="text" ng-model="detail.name_first" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.name_first" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 			<div class="col-md-4">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">Middle</span>
-					<input type="text" ng-model="detail.name_middle" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.name_middle" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 			<div class="col-md-4">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">Last</span>
-					<input type="text" ng-model="detail.name_last" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.name_last" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -83,7 +83,7 @@
 			<div class="col-md-4" ng-controller="DatepickerCtrl">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">DOB</span>
-						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" date-format="yyyy-MM-dd" date-type="string" ng-model="detail.dob" is-open="opened" ng-required="false" close-text="Close" />
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" date-format="yyyy-MM-dd" date-type="string" ng-model="ls.detail.dob" is-open="opened" ng-required="false" close-text="Close" />
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
@@ -92,7 +92,7 @@
 			<div class="col-md-4">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">SSN</span>
-					<input type="text" ng-model="detail.ssn" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.ssn" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -101,23 +101,23 @@
 			<div class="col-md-4">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">Email</span>
-					<input type="text" ng-model="detail.email" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.email" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 			<div class="col-md-4">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-success">Phone</span>
-					<input type="text" ng-model="detail.phone" class="form-control" placeholder="nnnnnnnnnn">
+					<input type="text" ng-model="ls.detail.phone" class="form-control" placeholder="nnnnnnnnnn">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
 		
 		<div class="row top-buffer">
 			<div class="col-xs-4">
-				{{detail.vp_area_gems_id}}
+				{{ls.detail.vp_area_gems_id}}
 			</div><!-- /.col -->
 			<div class="col-xs-4">
-				{{detail.department_gems_id}}
+				{{ls.detail.department_gems_id}}
 			</div><!-- /.col -->
 			<div class="col-xs-4">
 			</div><!-- /.col -->
@@ -127,7 +127,7 @@
 			<div class="col-sm-4">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-warning">VP Area</span>
-					<select class="form-control" ng-model="detail.vp_area_gems_id" ng-options="vpa.vp_area_gems_id as vpa.vp_area_name for vpa in vp_area_list">
+					<select class="form-control" ng-model="ls.detail.vp_area_gems_id" ng-options="vpa.vp_area_gems_id as vpa.vp_area_name for vpa in ls.vp_area_list">
 						<option value="">None</option>
 					</select>
 				</div><!-- /input-group -->
@@ -135,7 +135,7 @@
 			<div class="col-sm-4">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-warning">Department</span>
-					<select class="form-control" ng-model="detail.department_gems_id" ng-options="dept.department_gems_id as dept.department_name for dept in department_list | filter: dept.vp_area_gems_id = detail.vp_area_gems_id : true">
+					<select class="form-control" ng-model="ls.detail.department_gems_id" ng-options="dept.department_gems_id as dept.department_name for dept in ls.department_list | filter: dept.vp_area_gems_id = ls.detail.vp_area_gems_id : true">
 						<option value="">None</option>
 					</select>
 				</div><!-- /input-group -->
@@ -143,7 +143,7 @@
 			<div class="col-sm-4">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-warning">Program</span>
-					<input type="text" ng-model="detail.program" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.program" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -152,7 +152,7 @@
 			<div class="col-sm-12">
 				<div class="input-group input-group-md">
 					<span class="input-group-addon list-group-item-warning">Notes</span>
-					<textarea class="form-control" rows="6" ng-model='detail.notes'></textarea>
+					<textarea class="form-control" rows="6" ng-model='ls.detail.notes'></textarea>
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -161,13 +161,13 @@
 			<div class="col-md-4">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-warning">Sponsor</span>
-					<input type="text" ng-model="detail.sponsor_netid" class="form-control" placeholder="">
+					<input type="text" ng-model="ls.detail.sponsor_netid" class="form-control" placeholder="">
 				</div><!-- /input-group -->
 			</div><!-- /.col -->
 			<div class="col-md-4" ng-controller="DatepickerCtrl">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-warning">Start Date</span>
-						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="detail.start_date" is-open="opened" ng-required="false" close-text="Close" />
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="ls.detail.start_date" is-open="opened" ng-required="false" close-text="Close" />
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
@@ -176,7 +176,7 @@
 			<div class="col-md-4" ng-controller="DatepickerCtrl">
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon list-group-item-warning">End Date</span>
-						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="detail.end_date" is-open="opened" ng-required="false" close-text="Close" />
+						<input type="text" placeholder="yyyy-mm-dd" class="form-control" datepicker-popup="yyyy-MM-dd" ng-model="ls.detail.end_date" is-open="opened" ng-required="false" close-text="Close" />
 						<span class="input-group-btn">
 							<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
 						</span>
@@ -187,7 +187,7 @@
 		<div class="btn-group top-buffer">
 		  <div class="controls">
 			<div ng-switch on="details.id > 0">
-			  <button class="btn btn-success" ng-disabled="!detail.name_last || !detail.name_first || !detail.dob" ng-click="vipUpdate()">
+			  <button class="btn btn-success" ng-disabled="!ls.detail.name_last || !ls.detail.name_first || !ls.detail.dob" ng-click="vipUpdate()">
 				  <span class="glyphicon glyphicon-refresh"></span> Update
 			  </button>
 			</div>

@@ -34,7 +34,7 @@
   </div><!-- /.container-fluid -->
 </nav>
 
-{{identity_list.length}} records...
+{{ls.identity_list.length}} records...
 <table class="table table-striped table-hover">
     <thead>
         <tr class="info">
@@ -47,7 +47,7 @@
         </tr>
     </thead>
     <tbody class="example-animate-container">
-        <tr ng-repeat="id in identity_list | orderBy: 'name'" class="success animate-repeat" ng-click="vipDetails(id)">
+        <tr ng-repeat="id in ls.identity_list | orderBy: 'name'" class="success animate-repeat" ng-click="vipDetails(id)">
             <td>{{id.vip_id}}</td>
             <td>{{id.name_last}} {{id.name_first}} {{id.name_middle}}</td>
             <td>{{id.dob | date:'yyyy-MM-dd'}}</td>
