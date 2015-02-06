@@ -68,7 +68,7 @@ myApp
 					url: lsTs,
 					withCredentials: true,
 					responseType: 'text',
-					headers: { "Content-Type": "application/json"},
+					headers: { 'Content-Type': 'application/json'},
 					data: {'service': lsAppid},
 					transformResponse: function(data) {
 						return data;
