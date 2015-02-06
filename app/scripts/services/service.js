@@ -67,7 +67,12 @@ myApp
 					method: 'POST',
 					url: lsTs,
 					withCredentials: true,
-					data: {'service': lsAppid}
+					responseType: 'text',
+					headers: { "Content-Type": "application/json"},
+					data: {'service': lsAppid},
+					transformResponse: function(data) {
+						return data;
+					}
 				}).success(function(response) {
 					deferred.resolve(response);
 				}).error(function(){

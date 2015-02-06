@@ -94,7 +94,7 @@ myApp.run(['$rootScope', '$location', 'storage', '$log', 'SERVER_APP_ONE_URL', f
 				'token' : ''}
 		}
 	} , storeName: 'vipir'});
-	$log.info('run: '+ JSON.stringify($rootScope.ls, null, '\t'));
+	$log.info('run: '+ JSON.stringify($rootScope.ls.service, null, '\t'));
 }]);
 
 // define html5 directive for authorization
